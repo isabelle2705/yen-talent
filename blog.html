@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Yen Talent Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #080808;
+      --white: #f5f0ea;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gray: #2a2a2a;
+      --gray-mid: #555;
+      --gray-light: #999;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 60px;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.2em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 10px 24px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+    /* HERO */
+    .blog-hero {
+      padding: 160px 60px 80px;
+      position: relative;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      background:
+        radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.05) 0%, transparent 60%),
+        linear-gradient(135deg, #0a0a0a 0%, #111 50%, #080808 100%);
+    }
+    .blog-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+    .blog-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .blog-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+    .blog-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+    .blog-hero h1 em { color: var(--gold); font-style: italic; }
+    .blog-hero p {
+      font-size: 1rem;
+      color: var(--gray-light);
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* FILTER TABS */
+    .filter-bar {
+      padding: 32px 60px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      background: rgba(8,8,8,0.8);
+      position: sticky; top: 80px; z-index: 50;
+      backdrop-filter: blur(10px);
+    }
+    .filter-btn {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border: 1px solid var(--gray-mid);
+      color: var(--gray-light);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .filter-btn.active { background: rgba(201,168,76,0.08); }
+
+    /* FEATURED POST */
+    .featured-post {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .featured-image {
+      background: var(--gray);
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+    .featured-post:hover .featured-image img {
+      opacity: 0.9;
+      transform: scale(1.03);
+    }
+    .featured-image-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+      font-size: 4rem;
+    }
+    .featured-badge {
+      position: absolute;
+      top: 28px; left: 28px;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--black);
+      padding: 6px 14px;
+      font-weight: 500;
+    }
+    .featured-content {
+      padding: 60px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-left: 1px solid rgba(201,168,76,0.1);
+    }
+    .post-category {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .featured-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .featured-content h2 em { color: var(--gold); font-style: italic; }
+    .post-excerpt {
+      font-size: 0.9rem;
+      color: var(--gray-light);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+    .post-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 28px;
+    }
+    .read-more {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: gap 0.3s;
+      cursor: pointer;
+      background: none; border: none;
+    }
+    .read-more:hover { gap: 16px; }
+    .read-more::after { content: '→'; }
+
+    /* GRID */
+    .blog-grid {
+      padding: 60px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(201,168,76,0.08);
+    }
+    .blog-card {
+      background: var(--black);
+      padding: 40px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .blog-card:hover { background: #0f0f0f; }
+    .card-image {
+      aspect-ratio: 16/9;
+      background: var(--gray);
+      margin-bottom: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+    .card-image-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    }
+    .blog-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+    .blog-card h3 em { color: var(--gold); font-style: italic; }
+    .card-excerpt {
+      font-size: 0.82rem;
+      color: var(--gray-light);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    /* ARTICLE MODAL */
+    .article-overlay {
+      position: fixed; inset: 0;
+      background: rgba(8,8,8,0.97);
+      z-index: 200;
+      overflow-y: auto;
+      display: none;
+      padding: 0;
+    }
+    .article-overlay.open { display: block; }
+    .article-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 120px 40px 80px;
+    }
+    .article-close {
+      position: fixed;
+      top: 32px; right: 40px;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      background: none; border: none;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: color 0.3s;
+      z-index: 201;
+    }
+    .article-close:hover { color: var(--gold); }
+    .article-category {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+    .article-title em { color: var(--gold); font-style: italic; }
+    .article-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .article-body {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(245,240,234,0.85);
+    }
+    .article-body p { margin-bottom: 24px; }
+    .article-body h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--white);
+      margin: 48px 0 20px;
+    }
+    .article-body h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 36px 0 16px;
+    }
+    .article-body blockquote {
+      border-left: 2px solid var(--gold);
+      padding: 16px 28px;
+      margin: 32px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--gold-light);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 48px 60px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.2em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-links { display: flex; gap: 32px; list-style: none; }
+    .footer-links a {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-size: 0.65rem;
+      color: var(--gray-mid);
+      letter-spacing: 0.1em;
+    }
+
+    /* FADE IN */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .blog-hero { padding: 120px 24px 60px; }
+      .filter-bar { padding: 20px 24px; }
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-content { padding: 32px 24px; }
+      .blog-grid { padding: 0; grid-template-columns: 1fr; }
+      .blog-card { padding: 28px 24px; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">YEN <span>TALENT</span></a>
+    <ul class="nav-links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#roster">Roster</a></li>
+      <li><a href="/blog.html" class="active">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a href="/#contact" class="nav-cta">Get In Touch</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="blog-hero">
+    <div class="blog-hero-grid"></div>
+    <div class="blog-eyebrow">Yen Talent Journal</div>
+    <h1>Stories from<br>the <em>Industry</em></h1>
+    <p>Insights on Asian talent in global film and television, the craft of acting, and the future of storytelling in a world shaped by AI.</p>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterPosts('all', this)">All</button>
+    <button class="filter-btn" onclick="filterPosts('asian-talent', this)">Asian Talent</button>
+    <button class="filter-btn" onclick="filterPosts('behind-scenes', this)">Behind the Scenes</button>
+    <button class="filter-btn" onclick="filterPosts('actor-tips', this)">Actor Tips</button>
+    <button class="filter-btn" onclick="filterPosts('ai-film', this)">AI & Film</button>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured-post fade-up" data-category="asian-talent" onclick="openArticle(0)">
+    <div class="featured-image">
+      <div class="featured-image-placeholder">🎬</div>
+      <div class="featured-badge">Featured</div>
+    </div>
+    <div class="featured-content">
+      <div class="post-category">Asian Talent · Global Stage</div>
+      <h2>Why <em>Asian Talent</em> Is Reshaping Hollywood's Next Chapter</h2>
+      <p class="post-excerpt">From the record-breaking success of Everything Everywhere All at Once to the global phenomenon of Squid Game, the doors to international storytelling have never been more open. Here's why now is the defining moment for Asian talent on the world stage.</p>
+      <div class="post-meta">March 2026 · 6 min read</div>
+      <button class="read-more">Read Article</button>
+    </div>
+  </div>
+
+  <!-- BLOG GRID -->
+  <div class="blog-grid" id="blogGrid">
+
+    <div class="blog-card fade-up" data-category="ai-film" onclick="openArticle(1)">
+      <div class="card-image"><div class="card-image-placeholder">🤖</div></div>
+      <div class="post-category">AI & Film</div>
+      <h3>How <em>AI</em> Is Changing the Casting Room — And What It Means for Actors</h3>
+      <p class="card-excerpt">AI tools are now scanning thousands of audition tapes in seconds. We break down what this means for the working actor in 2026.</p>
+      <div class="post-meta">March 2026 · 5 min read</div>
+      <button class="read-more">Read</button>
+    </div>
+
+    <div class="blog-card fade-up" data-category="actor-tips" onclick="openArticle(2)">
+      <div class="card-image"><div class="card-image-placeholder">🎭</div></div>
+      <div class="post-category">Actor Tips</div>
+      <h3>The Self-Tape That Books Jobs: <em>10 Rules</em> We Swear By</h3>
+      <p class="card-excerpt">After reviewing hundreds of self-tapes, we've identified the small details that consistently separate the bookings from the passes.</p>
+      <div class="post-meta">February 2026 · 7 min read</div>
+      <button class="read-more">Read</button>
+    </div>
+
+    <div class="blog-card fade-up" data-category="behind-scenes" onclick="openArticle(3)">
+      <div class="card-image"><div class="card-image-placeholder">🎥</div></div>
+      <div class="post-category">Behind the Scenes</div>
+      <h3>On Set in <em>New Zealand</em>: What Makes This Country a Production Dream</h3>
+      <p class="card-excerpt">From Shortland Street to international co-productions, New Zealand's intimacy and diversity make it one of the most exciting places to film right now.</p>
+      <div class="post-meta">February 2026 · 4 min read</div>
+      <button class="read-more">Read</button>
+    </div>
+
+    <div class="blog-card fade-up" data-category="ai-film" onclick="openArticle(4)">
+      <div class="card-image"><div class="card-image-placeholder">💡</div></div>
+      <div class="post-category">AI & Film</div>
+      <h3>AI-Generated Scripts: <em>Threat or Tool</em> for the Modern Screenwriter?</h3>
+      <p class="card-excerpt">As studios experiment with AI writing assistants, we explore what it means for human storytelling and why authentic voices matter more than ever.</p>
+      <div class="post-meta">January 2026 · 6 min read</div>
+      <button class="read-more">Read</button>
+    </div>
+
+    <div class="blog-card fade-up" data-category="asian-talent" onclick="openArticle(5)">
+      <div class="card-image"><div class="card-image-placeholder">🌏</div></div>
+      <div class="post-category">Asian Talent</div>
+      <h3>Bridging East and West: The <em>Bilingual Actor's</em> Unique Advantage</h3>
+      <p class="card-excerpt">In an era of global streaming, actors who can navigate both cultural worlds aren't just versatile — they're essential.</p>
+      <div class="post-meta">January 2026 · 5 min read</div>
+      <button class="read-more">Read</button>
+    </div>
+
+    <div class="blog-card fade-up" data-category="actor-tips" onclick="openArticle(6)">
+      <div class="card-image"><div class="card-image-placeholder">✨</div></div>
+      <div class="post-category">Actor Tips</div>
+      <h3>Building Your <em>Acting Reel</em> from Scratch in 2026</h3>
+      <p class="card-excerpt">No credits? No problem. We walk through exactly how to build a compelling demo reel when you're just starting out — or starting over.</p>
+      <div class="post-meta">December 2025 · 8 min read</div>
+      <button class="read-more">Read</button>
+    </div>
+
+  </div>
+
+  <!-- ARTICLE MODAL -->
+  <div class="article-overlay" id="articleOverlay">
+    <button class="article-close" onclick="closeArticle()">← Back to Blog</button>
+    <div class="article-inner">
+      <div class="article-category" id="articleCategory"></div>
+      <h1 class="article-title" id="articleTitle"></h1>
+      <div class="article-meta" id="articleMeta"></div>
+      <div class="article-body" id="articleBody"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="/" class="footer-logo">YEN <span>TALENT</span></a>
+    <ul class="footer-links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#roster">Roster</a></li>
+      <li><a href="/blog.html">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Yen Talent. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Article content
+    const articles = [
+      {
+        category: "Asian Talent · Global Stage",
+        title: "Why Asian Talent Is Reshaping Hollywood's Next Chapter",
+        meta: "March 2026 · 6 min read · By Yen Talent",
+        body: `
+          <p>The conversation about representation in Hollywood has shifted dramatically over the past decade. What was once a slow trickle of Asian faces in supporting roles has become a genuine movement — one driven by audience demand, streaming platforms hungry for global content, and the undeniable commercial success of Asian-led productions.</p>
+
+          <h2>A Turning Point in Global Storytelling</h2>
+          <p>The success of films like Everything Everywhere All at Once, Parasite, and Minari didn't just win awards — they rewired how studio executives think about risk. International stories, told with cultural specificity, are not niche. They are universal. The numbers proved it.</p>
+
+          <blockquote>"Authentic storytelling from Asian creatives isn't a trend. It's a correction."</blockquote>
+
+          <p>For talent agencies like Yen Talent, operating at the intersection of Asia and the West, this moment represents something profound: the infrastructure is finally catching up with the talent that was always there.</p>
+
+          <h3>The Streaming Effect</h3>
+          <p>Netflix, iQIYI, Youku, and Tencent Video are all investing heavily in content that travels across borders. A drama filmed in New Zealand with a Chinese cast can stream simultaneously in Auckland, Shanghai, and Los Angeles. This is the new reality — and Asian talent sits at the very centre of it.</p>
+
+          <h2>What This Means for Working Actors</h2>
+          <p>For Asian actors in markets like New Zealand, Singapore, and Australia, the opportunity has never been greater. Productions are actively seeking talent who can bridge cultural worlds — who bring authentic lived experience to roles that once would have been cast elsewhere.</p>
+
+          <p>At Yen Talent, we represent artists who embody exactly this quality. Our roster spans film, television, and stage across Auckland, Singapore, Guangzhou, and beyond. We believe the next wave of global storytelling will be written, directed, and performed by Asian talent — and we're here to make sure the world sees them.</p>
+
+          <h3>Looking Ahead</h3>
+          <p>The momentum is real. And for any actor, producer, or casting director reading this: the time to build those cross-cultural relationships is now, not later. The industry is moving. The question is whether you'll be part of shaping where it goes.</p>
+        `
+      },
+      {
+        category: "AI & Film",
+        title: "How AI Is Changing the Casting Room — And What It Means for Actors",
+        meta: "March 2026 · 5 min read · By Yen Talent",
+        body: `
+          <p>It used to take a team of casting assistants weeks to review audition submissions for a major production. Today, AI-powered tools can analyse thousands of self-tapes in a matter of hours — flagging emotional range, vocal clarity, physicality, and even cultural fit based on pattern recognition trained on decades of film data.</p>
+
+          <h2>The Technology Is Already in the Room</h2>
+          <p>Casting platforms are quietly integrating AI tools that sort, score, and shortlist talent before a human eye ever sees the tape. This isn't science fiction — it's already happening in Los Angeles, London, and increasingly in Asian markets.</p>
+
+          <blockquote>"The AI doesn't replace the casting director. It changes what the casting director has time to see."</blockquote>
+
+          <h3>What This Means for Your Self-Tape</h3>
+          <p>Technical quality matters more than ever. Lighting, audio, framing — these aren't just aesthetics. They're signals. A poorly lit tape may be filtered out before any human reviews it. The basics are now the baseline.</p>
+
+          <h2>The Human Element Remains</h2>
+          <p>Here's what AI cannot replicate: genuine presence, cultural nuance, the ineffable quality that makes an audience lean forward. The final casting decision will always be human. But AI is increasingly controlling who gets to that final stage.</p>
+
+          <p>For actors, the lesson is clear: invest in your technical setup, keep your digital presence strong, and make sure your representation knows how to get your work in front of the right platforms. The playing field is changing — but it's not closed.</p>
+        `
+      },
+      {
+        category: "Actor Tips",
+        title: "The Self-Tape That Books Jobs: 10 Rules We Swear By",
+        meta: "February 2026 · 7 min read · By Yen Talent",
+        body: `
+          <p>After reviewing hundreds of self-tapes from actors across Asia, New Zealand, and beyond, we've developed a clear picture of what separates the bookings from the passes. Most of the differences are not about talent. They're about craft and preparation.</p>
+
+          <h3>1. Your Background Tells a Story</h3>
+          <p>A clean, neutral background says you're a professional. A messy room says you don't care. Neither is dramatic — but casting directors notice.</p>
+
+          <h3>2. Light Your Face, Not the Room</h3>
+          <p>A ring light or a window facing you is all you need. The goal is to make your eyes visible and alive. Shadows across your face are the enemy.</p>
+
+          <h3>3. Frame Yourself Like a Medium Close-Up</h3>
+          <p>Top of head to just below the chest. Not a full body shot. Not an extreme close-up. This is the standard for a reason — it matches how you'll be seen on screen.</p>
+
+          <blockquote>"Your first frame is your first impression. Don't waste it."</blockquote>
+
+          <h3>4. Audio Is Non-Negotiable</h3>
+          <p>If they can't hear you clearly, nothing else matters. A simple lapel mic makes a world of difference. Test your audio before every tape.</p>
+
+          <h3>5. Know the Material Cold</h3>
+          <p>You should be so familiar with the sides that the words disappear and only the scene remains. Actors who are still searching for lines cannot be fully present.</p>
+
+          <h2>The Rest of the List</h2>
+          <p>6. Have someone read with you off-camera — even a friend reading flatly is better than acting into empty space. 7. Slate simply and warmly. 8. Do at least two takes with different choices. 9. Name your file properly — [Name_Role_Project]. 10. Submit on time. Always.</p>
+
+          <p>These rules won't guarantee a booking. But breaking them will guarantee you don't get one.</p>
+        `
+      },
+      {
+        category: "Behind the Scenes",
+        title: "On Set in New Zealand: What Makes This Country a Production Dream",
+        meta: "February 2026 · 4 min read · By Yen Talent",
+        body: `
+          <p>New Zealand has long been known internationally for its landscapes — the dramatic terrain that made Middle Earth feel real. But for those working in the industry here, it's something else entirely that makes this country special: its people, its intimacy, and its extraordinary range.</p>
+
+          <h2>A Small Industry With Big Ambition</h2>
+          <p>The New Zealand screen industry punches well above its weight. Productions like Shortland Street have run for over 30 years — an extraordinary training ground for working actors. Head High, Creamerie, and a growing number of internationally co-produced projects have put New Zealand talent on global radar.</p>
+
+          <blockquote>"In New Zealand, you can go from a student film to a major television credit in two years. The pathway is real."</blockquote>
+
+          <h3>The Diversity Opportunity</h3>
+          <p>New Zealand's multicultural makeup — including its significant Asian, Pasifika, and Māori communities — means authentic representation is not just possible, it's expected. For Asian talent in particular, Auckland offers something rare: a place where your face is not unusual, and where the industry is actively seeking your stories.</p>
+
+          <h2>Why We're Based Here</h2>
+          <p>Yen Talent chose New Zealand as its home base for exactly these reasons. We see the country as a bridge — between Asia and the English-speaking West, between independent filmmaking and major studio productions, between emerging talent and international opportunity. The Southern Lights are rising.</p>
+        `
+      },
+      {
+        category: "AI & Film",
+        title: "AI-Generated Scripts: Threat or Tool for the Modern Screenwriter?",
+        meta: "January 2026 · 6 min read · By Yen Talent",
+        body: `
+          <p>The writers' room is changing. AI tools like Claude, GPT, and a growing list of specialised screenwriting assistants are now capable of generating scene breakdowns, dialogue drafts, and structural outlines in minutes. The question for working writers is no longer whether AI will be involved — it's how.</p>
+
+          <h2>What AI Does Well</h2>
+          <p>AI excels at structural tasks: generating multiple versions of a scene, identifying pacing issues, researching period detail, or brainstorming plot alternatives quickly. For writers facing deadline pressure, these tools genuinely help.</p>
+
+          <blockquote>"AI is the best assistant who never sleeps and never has an ego. But it still needs a writer to know what the story is about."</blockquote>
+
+          <h3>What AI Cannot Replace</h3>
+          <p>Voice. Perspective. The specific way a character from Guangzhou who grew up in Auckland speaks to her mother on the phone. The texture of lived experience that makes dialogue feel true rather than assembled. This is the writer's irreplaceable contribution.</p>
+
+          <h2>The Authentic Voice Premium</h2>
+          <p>As AI-generated content floods the market, authenticity will become the scarcest and most valuable commodity in storytelling. For Asian writers, directors, and actors telling their own stories — this is the moment. The stories only you can tell have never been more needed.</p>
+        `
+      },
+      {
+        category: "Asian Talent",
+        title: "Bridging East and West: The Bilingual Actor's Unique Advantage",
+        meta: "January 2026 · 5 min read · By Yen Talent",
+        body: `
+          <p>There is a particular kind of actor who exists in two worlds simultaneously — who carries the cadences of Mandarin in their body even when speaking English, who understands the unspoken rules of a family dinner in Singapore as naturally as a flat white order in Auckland. This actor has a rare and extraordinary advantage in today's industry.</p>
+
+          <h2>The Global Streaming Equation</h2>
+          <p>When a production targets simultaneous release in China, Southeast Asia, Australia, and North America, the actor who can navigate cultural registers is not just versatile — they are essential. They reduce the need for creative compromise. They carry the story across markets intact.</p>
+
+          <blockquote>"A bilingual actor doesn't just translate language. They translate truth."</blockquote>
+
+          <h3>More Than Language</h3>
+          <p>Bilingual actors often carry bicultural instincts — an ability to read a room, adjust a performance register, and find emotional authenticity in characters from multiple backgrounds. In an era of co-productions and international content, this is a casting director's dream.</p>
+
+          <h2>Building on the Advantage</h2>
+          <p>If you are a bilingual Asian actor, lean into it. Make sure your representation understands both markets. Build relationships on both sides. And tell stories that only your specific vantage point can tell. The world is watching — and it finally wants to see you.</p>
+        `
+      },
+      {
+        category: "Actor Tips",
+        title: "Building Your Acting Reel from Scratch in 2026",
+        meta: "December 2025 · 8 min read · By Yen Talent",
+        body: `
+          <p>One of the most common questions we hear from emerging talent is: how do I build a reel when I don't have credits? The answer has changed dramatically in the age of affordable cameras, collaborative short film communities, and accessible editing software.</p>
+
+          <h2>The Purpose of a Reel Has Changed</h2>
+          <p>A reel is no longer just a record of your credits. It's a demonstration of your range, your presence, and your ability to inhabit a character. Casting directors know that emerging actors have limited credits — what they're looking for is evidence of potential.</p>
+
+          <blockquote>"One great scene of genuine emotion is worth more than three minutes of mediocre work from a forgettable production."</blockquote>
+
+          <h3>Creating Your Own Content</h3>
+          <p>Find a filmmaker — a film school student, an emerging director, a fellow actor who also directs. Develop a short scene together. Shoot it properly: good lighting, good audio, a location that serves the story. This can become the foundation of your reel.</p>
+
+          <h3>What to Include</h3>
+          <p>Keep your reel under 90 seconds. Open with your strongest moment — not your first chronological credit. Show range: at least one dramatic and one lighter scene if possible. Make sure your face is visible and well-lit throughout.</p>
+
+          <h2>The New Zealand Advantage</h2>
+          <p>New Zealand has an active short film and student film community. NZ Film Commission supports emerging talent. Platforms like Eventfinda and Facebook groups connect actors with productions constantly. The resources are there — the initiative has to come from you.</p>
+
+          <p>Your reel will grow with your career. The goal at the start is not perfection. The goal is proof of life — evidence that you show up, take the work seriously, and have something to offer. Start there.</p>
+        `
+      }
+    ];
+
+    function openArticle(index) {
+      const a = articles[index];
+      document.getElementById('articleCategory').textContent = a.category;
+      document.getElementById('articleTitle').innerHTML = a.title;
+      document.getElementById('articleMeta').textContent = a.meta;
+      document.getElementById('articleBody').innerHTML = a.body;
+      const overlay = document.getElementById('articleOverlay');
+      overlay.classList.add('open');
+      overlay.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeArticle() {
+      document.getElementById('articleOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function filterPosts(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const featured = document.querySelector('.featured-post');
+      const cards = document.querySelectorAll('.blog-card');
+      if (category === 'all') {
+        featured.style.display = 'grid';
+        cards.forEach(c => c.style.display = 'flex');
+      } else {
+        featured.style.display = featured.dataset.category === category ? 'grid' : 'none';
+        cards.forEach(c => {
+          c.style.display = c.dataset.category === category ? 'flex' : 'none';
+        });
+      }
+    }
+
+    // Escape key closes article
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArticle(); });
+
+    // Fade in on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
