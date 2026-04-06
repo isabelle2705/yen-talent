@@ -740,9 +740,54 @@
       transform: translateY(0);
     }
 
+    /* MOBILE NAV */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      font-size: 1.3rem;
+      padding: 6px 12px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(8,8,8,0.98);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 72px 30px 40px;
+      flex-direction: column;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      z-index: 99;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu li { list-style: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .nav-mobile-menu a {
+      display: block;
+      padding: 18px 0;
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-mobile-menu a:hover { color: var(--gold); }
+    .nav-mobile-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none; border: none;
+      color: var(--gold); font-size: 1.5rem;
+      cursor: pointer; line-height: 1;
+    }
+
     @media (max-width: 1024px) {
       nav { padding: 20px 30px; }
       .nav-links { display: none; }
+      .nav-hamburger { display: block; }
       .hero-content { padding: 0 30px 60px; }
       .about, .contact { grid-template-columns: 1fr; gap: 60px; padding: 80px 30px; }
       .services { padding: 80px 30px; }
@@ -779,10 +824,20 @@
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       padding: 8px 18px;
-      cursor: auto;
+      cursor: pointer;
       transition: all 0.3s;
     ">中文</button>
+    <button class="nav-hamburger" onclick="openMobileNav()" aria-label="Open menu">&#9776;</button>
   </nav>
+
+  <!-- MOBILE NAV MENU -->
+  <ul class="nav-mobile-menu" id="mobileNav">
+    <button class="nav-mobile-close" onclick="closeMobileNav()" aria-label="Close menu">&#x2715;</button>
+    <li><a href="#about" onclick="closeMobileNav()" data-i18n="nav_about">About</a></li>
+    <li><a href="#roster" onclick="closeMobileNav()" data-i18n="nav_roster">Roster</a></li>
+    <li><a href="/blog.html">Blog</a></li>
+    <li><a href="#contact" onclick="closeMobileNav()" data-i18n="nav_contact">Contact</a></li>
+  </ul>
 
   <!-- HERO -->
   <section class="hero">
@@ -976,36 +1031,72 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // ── SUPABASE CONFIG ─────────────────────────────────────
-    // Replace these with your actual Supabase credentials
-    const SUPABASE_URL = 'https://pjtddseixuzdodgoonko.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_4QajGBzRWkFGE_q7IVp1gQ_WhxlK8YY';
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    // ── TALENT ROSTER ────────────────────────────────────────────────────
+    // Edit this array to update the talent roster on the site.
+    const TALENTS = [
+      {
+        id: '1',
+        name_en: 'Mei Lin Chen', name_zh: '陈美琳',
+        role_en: 'Lead Actress — Film & TV', role_zh: '女主角 — 电影与电视',
+        based_in: 'Auckland / Hong Kong',
+        languages: 'English, Cantonese, Mandarin',
+        skills: 'Drama, Action, Dance',
+        photo_url: null, featured: true, status: 'active'
+      },
+      {
+        id: '2',
+        name_en: 'James Tanaka', name_zh: '田中健',
+        role_en: 'Actor — Stage & Screen', role_zh: '演员 — 舞台与荧幕',
+        based_in: 'Sydney',
+        languages: 'English, Japanese',
+        skills: 'Stage, Drama, Martial Arts',
+        photo_url: null, featured: false, status: 'active'
+      },
+      {
+        id: '3',
+        name_en: 'Aisha Park', name_zh: '朴爱沙',
+        role_en: 'Actress — Drama & Comedy', role_zh: '女演员 — 正剧与喜剧',
+        based_in: 'Singapore',
+        languages: 'English, Korean, Malay',
+        skills: 'Drama, Comedy, Hosting',
+        photo_url: null, featured: false, status: 'active'
+      },
+      {
+        id: '4',
+        name_en: 'Ryan Nguyen', name_zh: '阮瑞恩',
+        role_en: 'Actor — Action & Drama', role_zh: '演员 — 动作与正剧',
+        based_in: 'Bangkok / Sydney',
+        languages: 'English, Vietnamese, Thai',
+        skills: 'Action, Stunts, Drama',
+        photo_url: null, featured: false, status: 'active'
+      },
+      {
+        id: '5',
+        name_en: 'Yuki Sato', name_zh: '佐藤雪',
+        role_en: 'Actress — Commercial & Film', role_zh: '女演员 — 广告与电影',
+        based_in: 'Kuala Lumpur',
+        languages: 'English, Japanese, Malay',
+        skills: 'Commercial, Film, Modelling',
+        photo_url: null, featured: false, status: 'active'
+      },
+    ];
 
-    let allTalents = [];
-
-    async function fetchTalents() {
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/talents?status=eq.active&order=created_at.asc`, {
-          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-        });
-        allTalents = await res.json();
-        renderRoster();
-      } catch(e) {
-        // Fallback: show placeholder cards if Supabase not connected yet
-        renderFallback();
-      }
-    }
+    let allTalents = TALENTS;
 
     function renderRoster() {
       const grid = document.getElementById('rosterGrid');
-      if (!allTalents.length) { renderFallback(); return; }
       const isZh = typeof currentLang !== 'undefined' && currentLang === 'zh';
+      if (!allTalents.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray-mid);">No talent listed yet.</div>';
+        return;
+      }
       grid.innerHTML = allTalents.map(t => `
-        <div class="talent-card" onclick="openModal('${t.id}')">
+        <div class="talent-card" onclick="openModal('${t.id}')" style="cursor:pointer;">
           ${t.featured ? `<div class="talent-tag">${isZh ? '精选艺人' : 'Featured'}</div>` : ''}
           ${t.photo_url
-            ? `<img src="${t.photo_url}" alt="${t.name_en}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>`
+            ? `<img src="${t.photo_url}" alt="${t.name_en}" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>`
             : `<div class="talent-placeholder">
                 <div class="talent-placeholder-icon">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
@@ -1017,55 +1108,11 @@
           }
           <div class="talent-overlay">
             <div class="talent-name">${isZh && t.name_zh ? t.name_zh : t.name_en}</div>
-            ${t.based_in ? `<div class="talent-role">${t.based_in}</div>` : ''}
+            <div class="talent-role">${isZh && t.role_zh ? t.role_zh : t.role_en}</div>
             ${t.languages ? `<div style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#999;margin-top:4px;">${t.languages}</div>` : ''}
-            ${t.skills ? `<div style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#777;margin-top:2px;">${t.skills}</div>` : ''}
           </div>
         </div>
       `).join('');
-    }
-
-    function renderFallback() {
-      const grid = document.getElementById('rosterGrid');
-      const placeholders = [
-        { name: 'Mei Lin Chen', nameZh: '陈美琳', role: 'Lead Actress — Film & TV', roleZh: '女主角 — 电影与电视', featured: true },
-        { name: 'James Tanaka', nameZh: '田中健', role: 'Actor — Stage & Screen', roleZh: '演员 — 舞台与荧幕', featured: false },
-        { name: 'Aisha Park', nameZh: '朴爱沙', role: 'Actress — Drama & Comedy', roleZh: '女演员 — 正剧与喜剧', featured: false },
-        { name: 'Ryan Nguyen', nameZh: '阮瑞恩', role: 'Actor — Action & Drama', roleZh: '演员 — 动作与正剧', featured: false },
-        { name: 'Yuki Sato', nameZh: '佐藤雪', role: 'Actress — Commercial & Film', roleZh: '女演员 — 广告与电影', featured: false },
-      ];
-      const isZh = typeof currentLang !== 'undefined' && currentLang === 'zh';
-      grid.innerHTML = placeholders.map((p, i) => `
-        <div class="talent-card" onclick="openFallbackModal(${i})">
-          ${p.featured ? `<div class="talent-tag">${isZh ? '精选艺人' : 'Featured'}</div>` : ''}
-          <div class="talent-placeholder">
-            <div class="talent-placeholder-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-              </svg>
-            </div>
-            <span>Talent Photo</span>
-          </div>
-          <div class="talent-overlay">
-            <div class="talent-name">${isZh ? p.nameZh : p.name}</div>
-            <div class="talent-role">${isZh ? p.roleZh : p.role}</div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    const fallbackData = [
-      { en: { tag: 'Featured Talent', name: 'Mei Lin Chen', role: 'Lead Actress — Film & TV', based: 'Auckland / Hong Kong', languages: 'English, Cantonese, Mandarin', skills: 'Drama, Action, Dance' }, zh: { tag: '精选艺人', name: '陈美琳', role: '女主角 — 电影与电视', based: '奥克兰 / 香港', languages: '英语、粤语、普通话', skills: '正剧、动作、舞蹈' } },
-      { en: { tag: 'Represented Talent', name: 'James Tanaka', role: 'Actor — Stage & Screen', based: 'Sydney', languages: 'English, Japanese', skills: 'Stage, Drama, Martial Arts' }, zh: { tag: '旗下艺人', name: '田中健', role: '演员 — 舞台与荧幕', based: '悉尼', languages: '英语、日语', skills: '舞台剧、正剧、武术' } },
-      { en: { tag: 'Represented Talent', name: 'Aisha Park', role: 'Actress — Drama & Comedy', based: 'Singapore', languages: 'English, Korean, Malay', skills: 'Drama, Comedy, Hosting' }, zh: { tag: '旗下艺人', name: '朴爱沙', role: '女演员 — 正剧与喜剧', based: '新加坡', languages: '英语、韩语、马来语', skills: '正剧、喜剧、主持' } },
-      { en: { tag: 'Represented Talent', name: 'Ryan Nguyen', role: 'Actor — Action & Drama', based: 'Bangkok / Sydney', languages: 'English, Vietnamese, Thai', skills: 'Action, Stunts, Drama' }, zh: { tag: '旗下艺人', name: '阮瑞恩', role: '演员 — 动作与正剧', based: '曼谷 / 悉尼', languages: '英语、越南语、泰语', skills: '动作、特技、正剧' } },
-      { en: { tag: 'Represented Talent', name: 'Yuki Sato', role: 'Actress — Commercial & Film', based: 'Kuala Lumpur', languages: 'English, Japanese, Malay', skills: 'Commercial, Film, Modelling' }, zh: { tag: '旗下艺人', name: '佐藤雪', role: '女演员 — 广告与电影', based: '吉隆坡', languages: '英语、日语、马来语', skills: '广告、电影、模特' } },
-    ];
-
-    function openFallbackModal(i) {
-      const isZh = typeof currentLang !== 'undefined' && currentLang === 'zh';
-      const t = fallbackData[i][isZh ? 'zh' : 'en'];
-      showModal(t.tag, t.name, t.role, '', t.based, t.languages, t.skills);
     }
 
     function openModal(id) {
@@ -1102,7 +1149,6 @@
         skills ? `<div class="modal-detail"><span class="modal-detail-label">${skillsLabel}</span><span class="modal-detail-val">${skills}</span></div>` : '',
       ].join('');
 
-      // Update modal photo
       const modalPhoto = document.getElementById('modalPhoto');
       if (photo) {
         modalPhoto.innerHTML = `<img src="${photo}" alt="${name}" style="width:100%;height:100%;object-fit:cover;"/>`;
@@ -1127,12 +1173,11 @@
 
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    // Load talents on page load
-    if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
-      fetchTalents();
-    } else {
-      renderFallback();
-    }
+    // Mobile nav
+    function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); document.body.style.overflow = ''; }
+
+    renderRoster();
   </script>
 
   <script>
@@ -1266,4 +1311,19 @@
       // Footer links
       const footerText = { en: ['About','Roster','Blog','Contact'], zh: ['关于我们','演员名册','博客','联系我们'] };
       document.querySelectorAll('.footer-links li a').forEach((a, i) => {
-        if (footerTex
+        if (footerText[currentLang] && footerText[currentLang][i] !== undefined) {
+          a.textContent = footerText[currentLang][i];
+        }
+      });
+
+      // Mobile nav links
+      document.querySelectorAll('.nav-mobile-menu li a[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+    }
+
+    applyTranslations();
+  </script>
+</body>
+</html>

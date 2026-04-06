@@ -152,6 +152,14 @@
           <input class="form-input" id="nameZh" placeholder="e.g. 陈美琳"/>
         </div>
         <div class="form-group">
+          <label class="form-label">Role (English)</label>
+          <input class="form-input" id="roleEn" placeholder="e.g. Lead Actress — Film & TV"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Role (Chinese)</label>
+          <input class="form-input" id="roleZh" placeholder="e.g. 女主角 — 电影与电视"/>
+        </div>
+        <div class="form-group">
           <label class="form-label">Based In</label>
           <input class="form-input" id="basedIn" placeholder="e.g. Auckland / Singapore"/>
         </div>
@@ -282,7 +290,7 @@
   function openForm() {
     editingId = null;
     document.getElementById('formTitle').textContent = 'Add Talent';
-    ['nameEn','nameZh','basedIn','languages','skills','photoUrl'].forEach(id => document.getElementById(id).value = '');
+    ['nameEn','nameZh','roleEn','roleZh','basedIn','languages','skills','photoUrl'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('photoPreview').style.display = 'none';
     document.getElementById('talentStatus').value = 'active';
     document.getElementById('talentFeatured').value = 'false';
@@ -297,6 +305,8 @@
     document.getElementById('formTitle').textContent = 'Edit Talent';
     document.getElementById('nameEn').value = t.name_en||'';
     document.getElementById('nameZh').value = t.name_zh||'';
+    document.getElementById('roleEn').value = t.role_en||'';
+    document.getElementById('roleZh').value = t.role_zh||'';
     document.getElementById('basedIn').value = t.based_in||'';
     document.getElementById('languages').value = t.languages||'';
     document.getElementById('skills').value = t.skills||'';
@@ -326,6 +336,8 @@
     const talent = {
       name_en: document.getElementById('nameEn').value.trim(),
       name_zh: document.getElementById('nameZh').value.trim(),
+      role_en: document.getElementById('roleEn').value.trim(),
+      role_zh: document.getElementById('roleZh').value.trim(),
       based_in: document.getElementById('basedIn').value.trim(),
       languages: document.getElementById('languages').value.trim(),
       skills: document.getElementById('skills').value.trim(),
