@@ -63,6 +63,18 @@
     }
     .nav-cta:hover { background: var(--gold); color: var(--black); }
 
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); transition: transform 0.3s, opacity 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-menu { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a { font-family: 'Outfit', sans-serif; font-size: 1.5rem; color: var(--white); text-decoration: none; letter-spacing: 0.1em; }
+    .nav-mobile-menu a:hover { color: var(--gold); }
+    .mobile-menu-close { position: absolute; top: 24px; right: 30px; font-size: 2rem; color: var(--gold); cursor: pointer; background: none; border: none; font-family: serif; }
+
     /* HERO */
     .blog-hero {
       padding: 160px 60px 80px;
@@ -400,6 +412,8 @@
 
     @media (max-width: 768px) {
       nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
       .blog-hero { padding: 120px 24px 60px; }
       .filter-bar { padding: 20px 24px; }
       .featured-post { grid-template-columns: 1fr; }
@@ -422,7 +436,20 @@
       <li><a href="/#contact">Contact</a></li>
     </ul>
     <a href="/#contact" class="nav-cta">Get In Touch</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav-mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
+    <a href="/#about">About</a>
+    <a href="/#roster">Roster</a>
+    <a href="/blog.html" class="active">Blog</a>
+    <a href="/#contact">Contact</a>
+    <a href="/#contact" class="btn-primary" style="margin-top:16px;">Get In Touch</a>
+  </div>
 
   <!-- HERO -->
   <div class="blog-hero">
@@ -880,6 +907,22 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => { mobileMenu.classList.add('open'); hamburger.classList.add('open'); });
+    }
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); });
+    }
+    if (mobileMenu) {
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); });
+      });
+    }
   </script>
 </body>
 </html>
