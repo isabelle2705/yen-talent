@@ -1023,11 +1023,11 @@
       { id: 10, featured: false, name_en: 'Yuki Sato',    name_zh: '佐藤雪',   role_en: 'Actress — Commercial & Film', role_zh: '女演员 — 广告与电影',       based_in: 'Kuala Lumpur',              languages: 'English, Japanese, Malay',skills: 'Commercial, Film, Modelling', photo_url: '' },
     ];
 
-    let allTalents = TALENTS;
+    let allTalents = TALENTS.filter(t => t.photo_url);
 
     function renderRoster() {
       const grid = document.getElementById('rosterGrid');
-      if (!allTalents.length) { renderFallback(); return; }
+      if (!allTalents.length) { grid.innerHTML = ''; return; }
       const isZh = typeof currentLang !== 'undefined' && currentLang === 'zh';
       grid.innerHTML = allTalents.map(t => `
         <div class="talent-card" onclick="openModal('${t.id}')">
