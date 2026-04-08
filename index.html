@@ -428,7 +428,7 @@
       overflow: hidden;
       cursor: auto;
     }
-    .talent-card:first-child {
+    .talent-card.featured-card {
       aspect-ratio: 1/1;
       grid-column: span 2;
       grid-row: span 2;
@@ -768,7 +768,7 @@
       .services-grid { grid-template-columns: 1fr; }
       .roster { padding: 80px 30px; }
       .roster-grid { grid-template-columns: repeat(2, 1fr); }
-      .talent-card:first-child { grid-column: span 2; grid-row: span 2; }
+      .talent-card.featured-card { grid-column: span 2; grid-row: span 2; }
       .process { padding: 80px 30px; }
       .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
       .process-steps::before { display: none; }
@@ -1030,7 +1030,7 @@
       if (!allTalents.length) { grid.innerHTML = ''; return; }
       const isZh = typeof currentLang !== 'undefined' && currentLang === 'zh';
       grid.innerHTML = allTalents.map(t => `
-        <div class="talent-card" onclick="openModal('${t.id}')">
+        <div class="talent-card ${t.featured ? 'featured-card' : ''}" onclick="openModal('${t.id}')">
           ${t.featured ? `<div class="talent-tag">${isZh ? '精选艺人' : 'Featured'}</div>` : ''}
           ${t.photo_url
             ? `<img src="${t.photo_url}" alt="${t.name_en}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>`
