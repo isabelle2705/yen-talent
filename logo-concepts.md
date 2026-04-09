@@ -1,79 +1,64 @@
 # Yen Talent Agency — Logo Concepts
 
-**Brand:** Dark + Gold (#080808, #c9a84c) | Premium, editorial, cinematic
-**Tagline feeling:** Luxury talent agency meets Asian elegance
-**Constraint:** Must read clearly at small sizes (email sig, social) and pop at large sizes (website hero)
+> **Status:** Image generation blocked due to IP restrictions in this environment. Concepts documented below for manual generation or retry from main session.
 
 ---
 
-## Concept 1: The Rising Yen Glyph
+## Concept 1: The Bridge Mark
 
-**Style Direction:** Minimalist East-Meets-West typographic mark. The letter "Y" is abstracted into a vertical stroke that transitions into a subtle East Asian ink-brush quality at the bottom — suggesting both "Yen" (currency/cultural heritage) and "Rising" (upward trajectory). Clean, editorial, luxury.
+**Approach:** Minimalist geometric — an arching bridge connecting two diamond-shaped nodes.
 
-**Color Palette:**
-- Primary: Deep Black `#080808`
-- Accent: Antique Gold `#c9a84c`
-- Supporting: Soft Warm White `#f5f2eb` (for contrast/threshold use only)
+**Symbolic Meaning:** The bridge is the clearest visual metaphor for "East meets West" — a structure that connects two separate lands. The diamond nodes on either end suggest precision, value, and talent waiting to be discovered.
 
-**Typography:** Custom wordmark in a refined sans-serif or thin serif hybrid. "YEN TALENT" in uppercase tracking-widened letters. "AGENCY" smaller below. No heavy serifs — think Bottega Veneta meets Celine energy.
+**Asian Identity + Global Connection:** The bridge motif has deep roots in Asian architecture (拱桥, arch bridges). By modernizing it into a clean geometric mark, it speaks to Asian heritage while feeling globally relevant — like a modern passport to the world stage.
 
-**Symbolic Elements:**
-- The "Y" mark with a calligraphic lower flourish that subtly echoes a brushstroke
-- A thin gold horizontal rule beneath the wordmark (cinematic letterbox line)
-- No icons, no mascots — pure typographic confidence
+**Colors:** Near-black #080808 lines with gold #c9a84c accents on the nodes.
 
-**Final Logo Appearance:** A bold "YEN" wordmark with the Y's descender blooming into a soft gold brush-fade. "TALENT AGENCY" in precise small caps tracking below. Works in pure black, or black + gold accent. At small sizes: the Y mark is the icon. At large: the full wordmark breathes with generous whitespace.
+**Prompt for generation:**
+> "Minimalist luxury logo mark for Yen Talent Agency. A stylized arching bridge rendered in clean geometric lines, connecting two diamond-shaped nodes. The bridge spans from left to right, suggesting connection between East and West. The design uses near-black #080808 lines on a white background with gold #c9a84c accent on key nodes. Premium cinematic feel, no gradients, flat design, scalable symbol mark."
 
-**Image Prompt:**
-`Yen Talent Agency logo concept 1: Minimalist luxury wordmark "YEN" in bold black with a subtle gold brush-stroke flourish on the descender of the Y. "TALENT AGENCY" in refined small caps below. Dark background. Cinematic, editorial, premium Asian elegance. Clean negative space. No icons. --ar 3:2`
+**Image path:** `~/yen-talent/concept1-bridge.png`
 
 ---
 
-## Concept 2: The Open Gate
+## Concept 2: The Crescent Horizon
 
-**Style Direction:** A geometric mark inspired by the tension between East and West — an angular gate or portal that frames emptiness (a nod to ma, the Japanese concept of negative space). The gate form is asymmetric: one tall pillar (Asia), one shorter (global reach), suggesting movement and invitation. Like a luxury hotel entrance photographed at dusk.
+**Approach:** Stylized crescent/rising sun framed within an imperfect circular ring.
 
-**Color Palette:**
-- Primary: Deep Black `#080808`
-- Accent: Warm Gold `#c9a84c` (used sparingly — only on edge highlights)
-- Supporting: `#141414` (near-black for depth)
+**Symbolic Meaning:** The crescent references Asian cultural symbolism (Chinese crescent, Japanese moon imagery) while the incomplete circle suggests a horizon — the global stage these talents are rising toward. The gap in the circle also implies "not yet complete" — a talent still emerging, growing, reaching.
 
-**Typography:** "YEN TALENT" in a geometric sans-serif (Avant Garde-adjacent but custom). "AGENCY" in ultra-light weight spaced caps beneath. Clean, architectural, modern.
+**Asian Identity + Global Connection:** Combining the crescent (deeply Asian iconography) with a circular frame (universally global, like a stage spotlight or camera lens) creates the tension between Asian identity and global ambition.
 
-**Symbolic Elements:**
-- Two vertical strokes forming an asymmetric gate/portal frame
-- The right pillar slightly shorter and gold-tipped
-- Negative space in the center creates a subtle "arrow pointing out" (global talent flowing outward)
-- Thin gold hairlines on the top edge of each pillar — like a gilded frame
+**Colors:** Gold #c9a84c crescent against near-black #080808 ring on white.
 
-**Final Logo Appearance:** A stark black gate mark centered above "YEN TALENT AGENCY". The gold tip on the right pillar catches the eye first. At small sizes: the gate silhouette is the recognizable mark. At large: the negative space arrow becomes visible and satisfying. Feels architectural, confident, curated.
+**Prompt for generation:**
+> "Minimalist luxury logo mark for Yen Talent Agency. A stylized rising sun or crescent moon emblem combining a golden crescent shape below a circular ring, representing Asian identity and global stage. Clean geometric construction, near-black #080808 with gold #c9a84c fills. The crescent is framed within an imperfect circle suggesting a global horizon. Premium cinematic feel, flat design, no gradients, iconic symbol mark that can stand alone."
 
-**Image Prompt:**
-`Yen Talent Agency logo concept 2: Two vertical angular pillars forming an asymmetric gate or portal mark in deep black. Right pillar slightly shorter with a gold tip. Negative space between them suggests an upward-pointing arrow. "YEN TALENT AGENCY" typography below in geometric sans-serif. Dark cinematic background. Architectural luxury. --ar 3:2`
+**Image path:** `~/yen-talent/concept2-crescent.png`
 
 ---
 
-## Concept 3: The Curved Yen Symbol
+## Concept 3: The Split Diamond
 
-**Style Direction:** An organic, flowing mark that combines the curve of the yen currency symbol (¥) with the sweeping motion of a film credit sequence or cinematic iris. This is the most expressive concept — still restrained and premium, but with motion and soul. Think: a luxury brand film title card.
+**Approach:** Bold geometric diamond with a vertical golden divider — inspired by WME's iconic diamond but distinctly re-imagined.
 
-**Color Palette:**
-- Primary: Deep Black `#080808`
-- Accent: Rich Gold `#c9a84c` — used as a gradient or glow against the black
-- Supporting: `#1a1a1a` (depth layer)
+**Symbolic Meaning:** The diamond = talent, value, cut (like a "cut" in the industry — casting). The split down the middle creates two triangular halves: one near-black, one gold. The split suggests the duality of identity — Asian roots on one side, English-speaking global market on the other — united in one stone.
 
-**Typography:** "YEN" as a standalone mark (no "TALENT" in the primary logo — that lives below as supporting text). The wordmark is large, confident, letterform-based. "TALENT AGENCY" in a whisper-thin condensed sans below — almost disappearing at small sizes.
+**Asian Identity + Global Connection:** Where WME's diamond is solid and singular, Yen Talent's split diamond acknowledges that identity is multi-faceted. The gold stripe running through is the "bridge" between the two halves. It's a bold, confident statement: we represent something specific AND we belong on the world stage.
 
-**Symbolic Elements:**
-- The "¥" symbol stylized with a long sweeping curve that extends rightward into a horizontal line — evoking both currency (value of talent) and a horizon (global reach)
-- A soft gold radial glow behind the symbol suggesting an Oscar or stage light
-- Subtle grain texture on the black background (editorial print feel)
+**Colors:** Near-black #080808 diamond body with gold #c9a84c vertical stripe.
 
-**Final Logo Appearance:** The ¥ mark is the hero — large, centered, breathing. The gold glow is warmth inside confidence. "YEN" doesn't need to be spelled out if the symbol is present. At small sizes: the ¥ is globally recognizable. At large: the glow and horizon line become cinematic and dramatic. This concept has the most emotional pull.
+**Prompt for generation:**
+> "Minimalist luxury logo mark for Yen Talent Agency. A bold geometric diamond shape split by a vertical golden line, creating two opposing triangular halves. The diamond is in near-black #080808 with a gold #c9a84c accent stripe through the center. Inspired by WME diamond but distinctly Asian — the split suggests duality, balance, bridge between cultures. Premium cinematic feel, flat design, no gradients, scalable iconic symbol mark."
 
-**Image Prompt:**
-`Yen Talent Agency logo concept 3: Stylized yen currency symbol (¥) with a sweeping extended horizontal curve forming a horizon line, rendered in gold on deep black. Soft radial gold glow behind the symbol suggesting a stage light. "YEN TALENT AGENCY" in whisper-thin condensed sans below. Cinematic, emotional, premium. Editorial grain texture. --ar 3:2`
+**Image path:** `~/yen-talent/concept3-geometric.png`
 
 ---
 
-*All three concepts: readable at favicon/email size, impactful at billboard/website hero size. Black + gold only. No color exceptions.*
+## Notes
+
+- All concepts are designed as **standalone symbol marks** — no wordmark needed for the icon itself
+- Brand colors: `#080808` (near-black) and `#c9a84c` (gold)
+- "Premium, cinematic, globally-minded, confident, modern luxury" — none of the concepts use gradients, drop shadows, or decorative elements that would date them
+- For social media/favicons: square aspect ratio works best for all three
+- All prompts generated with `minimax/image-01` model — if blocked, try from main session or with explicit model override
