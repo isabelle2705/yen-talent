@@ -790,6 +790,104 @@
       footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 30px; }
       .footer-links { flex-wrap: wrap; justify-content: center; }
     }
+
+    @media (max-width: 768px) {
+      html, body {
+        font-size: 16px;
+        letter-spacing: 0;
+      }
+      nav {
+        padding: 20px 24px;
+        gap: 16px;
+      }
+      .nav-logo { font-size: 1.2rem; }
+      .nav-links,
+      .nav-cta { display: none; }
+      .hero { min-height: 100vh; }
+      .hero-bg { opacity: 0.15; }
+      .hero-content { padding: 0 24px 48px; }
+      .hero-title,
+      .hero h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
+      .hero-sub {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        max-width: none;
+        margin-bottom: 32px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-ghost {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+      .hero-scroll { display: none; }
+      .hero-number {
+        font-size: 12rem;
+        opacity: 0.06;
+        right: -12px;
+      }
+      .marquee-item {
+        padding: 0 24px;
+        gap: 24px;
+        letter-spacing: 0.25em;
+      }
+      #about {
+        padding: 80px 24px !important;
+      }
+      #about .about-inner {
+        max-width: 100%;
+      }
+      #about .about-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 36px !important;
+        margin-top: 32px !important;
+      }
+      .services,
+      .roster,
+      .process {
+        padding: 80px 24px;
+      }
+      .roster-header,
+      .services-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .roster-grid { grid-template-columns: 1fr; }
+      .talent-card,
+      .talent-card.featured-card {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      .process-steps { grid-template-columns: 1fr; gap: 32px; }
+      #contact > div:first-child {
+        padding: 80px 24px 64px !important;
+      }
+      #contact > div:first-child p {
+        font-size: 0.9rem !important;
+        line-height: 1.7 !important;
+      }
+      #contact > div:nth-child(2) {
+        padding: 64px 24px !important;
+      }
+      #contact > div:nth-child(2) > div > div:first-child {
+        grid-template-columns: 1fr !important;
+      }
+      #contact > div:last-child {
+        padding: 28px 24px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+      }
+      footer {
+        padding: 40px 24px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -890,10 +988,10 @@
 
   <!-- ABOUT -->
   <section id="about" style="padding: 120px 60px; background: var(--black);">
-    <div style="max-width: 1140px; margin: 0 auto;">
+    <div class="about-inner" style="max-width: 1140px; margin: 0 auto;">
       <div class="section-label">About</div>
       <h2 class="about-title">About <em>Yen Talent</em></h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 40px;">
+      <div class="about-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 40px;">
         <div>
           <p class="about-text">Yen Talent represents a curated roster of Asian actors fluent in English, working across the Asia-Pacific and international screen industries. Based in Singapore, we operate with a global outlook—connecting talent with opportunities across Asia, Australia, Canada, and beyond.</p>
           <p class="about-text">We specialise in representing talents who are able to work confidently in English-speaking productions, making them highly adaptable for international projects, co-productions, and cross-border collaborations.</p>
